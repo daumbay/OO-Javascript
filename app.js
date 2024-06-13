@@ -123,7 +123,18 @@ document.querySelector("#btn").addEventListener("click", function () {
 
 // Create Dino Compare Method 1
 // NOTE: Weight in JSON file is in lbs, height in inches.
-
+Dino.prototype.compareWeight = function (dino, human) {
+  const difference = dino.weight > human.weight;
+  if (difference > 0) {
+    console.log(
+      `${dino.species} is heavier than the human by ${difference} lbs`
+    );
+  } else {
+    console.log(
+      `${dino.species} is lighter than the human by ${-difference} lbs`
+    );
+  }
+};
 // Create Dino Compare Method 2
 // NOTE: Weight in JSON file is in lbs, height in inches.
 
