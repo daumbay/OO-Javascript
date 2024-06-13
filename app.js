@@ -99,6 +99,14 @@ const dino6 = new Dino(data.Dinos[6]);
 const dino7 = new Dino(data.Dinos[7]);
 
 // Create Human Object
+
+function Human(name, height, weight, diet) {
+  (this.name = name),
+    (this.height = height),
+    (this.weight = weight),
+    (this.diet = diet);
+}
+
 const humanName = document.querySelector("#name").value;
 const humanHeight =
   document.querySelector("#feet").value +
