@@ -1,4 +1,4 @@
-// json object copied from dino.json
+// Copy JSON object
 const data = {
   Dinos: [
     {
@@ -8,7 +8,12 @@ const data = {
       diet: "herbavor",
       where: "North America",
       when: "Late Cretaceous",
-      fact: "First discovered in 1889 by Othniel Charles Marsh",
+      fact: [
+        "First discovered in 1889 by Othniel Charles Marsh",
+        "Triceratops means 'three horned face'",
+        "Triceratops was one of the last dinosaurs",
+      ],
+      img: "./images/triceratops.png",
     },
     {
       species: "Tyrannosaurus Rex",
@@ -17,7 +22,12 @@ const data = {
       diet: "carnivor",
       where: "North America",
       when: "Late Cretaceous",
-      fact: "The largest known skull measures in at 5 feet long.",
+      fact: [
+        "The largest known skull measures in at 5 feet long.",
+        "Tyrannosaurus Rex is not from the Jurassic Period",
+        "T-Rex has around 60 bone crunching teeth",
+      ],
+      img: "./images/tyrannosaurus rex.png",
     },
     {
       species: "Anklyosaurus",
@@ -26,7 +36,12 @@ const data = {
       diet: "herbavor",
       where: "North America",
       when: "Late Cretaceous",
-      fact: "Anklyosaurus survived for approximately 135 million years.",
+      fact: [
+        "Anklyosaurus survived for approximately 135 million years.",
+        "Ankylosaurus' Clubbed Tail May Have Shattered Tyrannosaur Bones.",
+        "Ankylosaurus lived about 70 to 65.5 million years ago.",
+      ],
+      img: "./images/anklyosaurus.png",
     },
     {
       species: "Brachiosaurus",
@@ -35,7 +50,12 @@ const data = {
       diet: "herbavor",
       where: "North America",
       when: "Late Jurasic",
-      fact: "An asteroid was named 9954 Brachiosaurus in 1991.",
+      fact: [
+        "An asteroid was named 9954 Brachiosaurus in 1991.",
+        "Brachiosaurus' neck was 9 metres long",
+        "Brachiosaurus was named after its arms",
+      ],
+      img: "./images/brachiosaurus.png",
     },
     {
       species: "Stegosaurus",
@@ -44,7 +64,12 @@ const data = {
       diet: "herbavor",
       where: "North America, Europe, Asia",
       when: "Late Jurasic to Early Cretaceous",
-      fact: "The Stegosaurus had between 17 and 22 seperate places and flat spines.",
+      fact: [
+        "The Stegosaurus had between 17 and 22 seperate places and flat spines.",
+        "Stegosaurus had a brain the size of a walnut",
+        "Stegosaurus supplemented its diet with small rocks",
+      ],
+      img: "./images/stegosaurus.png",
     },
     {
       species: "Elasmosaurus",
@@ -53,7 +78,12 @@ const data = {
       diet: "carnivor",
       where: "North America",
       when: "Late Cretaceous",
-      fact: "Elasmosaurus was a marine reptile first discovered in Kansas.",
+      fact: [
+        "Elasmosaurus was a marine reptile first discovered in Kansas.",
+        "The neck of Elasmosaurus contained 71 vertebrae",
+        "Elasmosaurus' were slow swimmers",
+      ],
+      img: "./images/elasmosaurus.png",
     },
     {
       species: "Pteranodon",
@@ -62,7 +92,12 @@ const data = {
       diet: "carnivor",
       where: "North America",
       when: "Late Cretaceous",
-      fact: "Actually a flying reptile, the Pteranodon is not a dinosaur.",
+      fact: [
+        "Actually a flying reptile, the Pteranodon is not a dinosaur.",
+        "Pteranodon's wingspan was at least 23 feet",
+        "Pteradon's head had a massive crest at the back of the skull",
+      ],
+      img: "./images/pteranodon.png",
     },
     {
       species: "Pigeon",
@@ -71,7 +106,12 @@ const data = {
       diet: "herbavor",
       where: "World Wide",
       when: "Holocene",
-      fact: "All birds are living dinosaurs.",
+      fact: [
+        "All birds are living dinosaurs.",
+        "Birds belong to the theropod group of dinosaurs that included T. rex.",
+        "Dinosaurs are more bird-like than reptile-like.",
+      ],
+      img: "./images/pigeon.png",
     },
   ],
 };
@@ -82,22 +122,15 @@ function Dino(dino) {
   this.weight = dino.weight;
   this.height = dino.height;
   this.diet = dino.diet;
-  this.where = dino.where;
-  this.when = dino.when;
+  this.img = dino.img;
   this.fact = dino.fact;
 }
 
 // Create Dino Objects
-
-const dino0 = new Dino(data.Dinos[0]);
-const dino1 = new Dino(data.Dinos[1]);
-const dino2 = new Dino(data.Dinos[2]);
-const dino3 = new Dino(data.Dinos[3]);
-const dino4 = new Dino(data.Dinos[4]);
-const dino5 = new Dino(data.Dinos[5]);
-const dino6 = new Dino(data.Dinos[6]);
-const dino7 = new Dino(data.Dinos[7]);
-
+const dino = [];
+for (let i = 0; i < 8; i++) {
+  dino[i] = new Dino(data.Dinos[i]);
+}
 // Create Human Object
 
 function Human(name, height, weight, diet) {
@@ -151,11 +184,35 @@ Dino.prototype.compareHeight = function (dino, human) {
 };
 // Create Dino Compare Method 3
 // NOTE: Weight in JSON file is in lbs, height in inches.
-
+Dino.prototype.compareDiet = function (dino, human) {
+  if (dino.diet !== human.diet) {
+    console.log(`${dino.species} had a different diet than the human`);
+  } else {
+    console.log(`${dino.species} had the same diet as the human`);
+  }
+};
 // Generate Tiles for each Dino in Array
+const tiles = [];
+for (let i = 0; i < 8; i++) {
+  const div = document.createElement("div");
+  const h3 = document.createElement("h3");
+  const img = document.createElement("img");
+  const p = document.createElement("p");
+  div.className = "grid-item";
+  h3.innerText = dino[i].species;
+  img.src = dino[i].img;
+  p.innerText = dino[i].fact[Math.floor(Math.random() * 3)];
+  div.appendChild(h3);
+  div.appendChild(img);
+  div.appendChild(p);
+  tiles.push(div);
+}
 
 // Add tiles to DOM
-
+for (let i = 0; i < 8; i++) {
+  const main = document.querySelector("#grid");
+  main.appendChild(tiles[i]);
+}
 // Remove form from screen
 
 // On button click, prepare and display infographic
