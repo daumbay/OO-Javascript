@@ -208,8 +208,19 @@ for (let i = 0; i < 8; i++) {
   tiles.push(div);
 }
 
+// Add human data to dino tiles
+const div = document.createElement("div");
+const h3 = document.createElement("h3");
+const img = document.createElement("img");
+div.className = "grid-item";
+h3.innerText = human.name;
+img.src = "./images/human.png";
+div.appendChild(h3);
+div.appendChild(img);
+tiles.splice(4, 0, div);
+
 // Add tiles to DOM
-for (let i = 0; i < 8; i++) {
+for (let i = 0; i < 9; i++) {
   const main = document.querySelector("#grid");
   main.appendChild(tiles[i]);
 }
