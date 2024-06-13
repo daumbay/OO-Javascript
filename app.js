@@ -107,9 +107,9 @@ const data = {
       where: "World Wide",
       when: "Holocene",
       fact: [
-        "All birds are living dinosaurs.",
-        "Birds belong to the theropod group of dinosaurs that included T. rex.",
-        "Dinosaurs are more bird-like than reptile-like.",
+        "All birds are living dinosaurs",
+        "All birds are living dinosaurs",
+        "All birds are living dinosaurs",
       ],
       img: "./images/pigeon.png",
     },
@@ -135,7 +135,7 @@ function createDino() {
   return dino;
 }
 
-// Create Human Object
+// Create Human Constructor
 
 function Human(name, height, weight, diet) {
   (this.name = name),
@@ -144,17 +144,10 @@ function Human(name, height, weight, diet) {
     (this.diet = diet);
 }
 
+// Create Human Object
 const human = new Human();
 
 // Use IIFE to get human data from form
-(function () {
-  human.name = document.querySelector("#name").value;
-  human.height =
-    document.querySelector("#feet").value * 12 +
-    document.querySelector("#inches").value;
-  human.weight = document.querySelector("#weight").value;
-  human.diet = document.querySelector("#diet").value;
-})();
 
 // Create Dino Compare Method 1
 // NOTE: Weight in JSON file is in lbs, height in inches.
@@ -195,7 +188,7 @@ Dino.prototype.compareDiet = function (dino, human) {
 };
 
 // Generate Tiles for each Dino in Array
-function tileGenerator() {
+function tileGenerator(dino) {
   const tiles = [];
   for (let i = 0; i < 8; i++) {
     const div = document.createElement("div");
@@ -241,4 +234,18 @@ function removeForm() {
 }
 
 // On button click, prepare and display infographic
-document.querySelector("#btn").addEventListener("click", function () {});
+document.querySelector("#btn").addEventListener("click", function () {
+  const dino = createDino();
+  (function () {
+    human.name = document.querySelector("#name").value;
+    human.height =
+      document.querySelector("#feet").value * 12 +
+      document.querySelector("#inches").value;
+    human.weight = document.querySelector("#weight").value;
+    human.diet = document.querySelector("#diet").value;
+  })();
+  const tiles = tileGenerator(dino);
+  addHuman(tiles);
+  addTiles(tiles);
+  removeForm();
+});
