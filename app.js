@@ -1,3 +1,4 @@
+// json object copied from dino.json
 const data = {
   Dinos: [
     {
@@ -98,7 +99,19 @@ const dino6 = new Dino(data.Dinos[6]);
 const dino7 = new Dino(data.Dinos[7]);
 
 // Create Human Object
+const humanName = document.querySelector("#name").value;
+const humanHeight =
+  document.querySelector("#feet").value +
+  document.querySelector("#inches").value / 12;
+const humanWeight = document.querySelector("#weight").value;
+const humanDiet = document.querySelector("#diet").value;
 
+const human = {
+  name: humanName,
+  height: humanHeight,
+  weight: humanWeight,
+  diet: humanDiet,
+};
 // Use IIFE to get human data from form
 
 // Create Dino Compare Method 1
