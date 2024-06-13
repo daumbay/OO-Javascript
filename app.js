@@ -107,22 +107,17 @@ function Human(name, height, weight, diet) {
     (this.diet = diet);
 }
 
-let human = new Human();
+const human = new Human();
 
 // Use IIFE to get human data from form
 document.querySelector("#btn").addEventListener("click", function () {
   (function () {
-    const humanName = document.querySelector("#name").value;
-    const humanHeight =
+    human.name = document.querySelector("#name").value;
+    human.height =
       document.querySelector("#feet").value * 12 +
       document.querySelector("#inches").value;
-    const humanWeight = document.querySelector("#weight").value;
-    const humanDiet = document.querySelector("#diet").value;
-
-    human.name = humanName;
-    human.height = humanHeight;
-    human.weight = humanWeight;
-    human.diet = humanDiet;
+    human.weight = document.querySelector("#weight").value;
+    human.diet = document.querySelector("#diet").value;
   })();
 });
 
