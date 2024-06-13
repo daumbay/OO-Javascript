@@ -127,10 +127,14 @@ function Dino(dino) {
 }
 
 // Create Dino Objects
-const dino = [];
-for (let i = 0; i < 8; i++) {
-  dino[i] = new Dino(data.Dinos[i]);
+function createDino() {
+  const dino = [];
+  for (let i = 0; i < 8; i++) {
+    dino[i] = new Dino(data.Dinos[i]);
+  }
+  return dino;
 }
+
 // Create Human Object
 
 function Human(name, height, weight, diet) {
@@ -143,16 +147,14 @@ function Human(name, height, weight, diet) {
 const human = new Human();
 
 // Use IIFE to get human data from form
-document.querySelector("#btn").addEventListener("click", function () {
-  (function () {
-    human.name = document.querySelector("#name").value;
-    human.height =
-      document.querySelector("#feet").value * 12 +
-      document.querySelector("#inches").value;
-    human.weight = document.querySelector("#weight").value;
-    human.diet = document.querySelector("#diet").value;
-  })();
-});
+(function () {
+  human.name = document.querySelector("#name").value;
+  human.height =
+    document.querySelector("#feet").value * 12 +
+    document.querySelector("#inches").value;
+  human.weight = document.querySelector("#weight").value;
+  human.diet = document.querySelector("#diet").value;
+})();
 
 // Create Dino Compare Method 1
 // NOTE: Weight in JSON file is in lbs, height in inches.
@@ -191,39 +193,52 @@ Dino.prototype.compareDiet = function (dino, human) {
     console.log(`${dino.species} had the same diet as the human`);
   }
 };
+
 // Generate Tiles for each Dino in Array
-const tiles = [];
-for (let i = 0; i < 8; i++) {
-  const div = document.createElement("div");
-  const h3 = document.createElement("h3");
-  const img = document.createElement("img");
-  const p = document.createElement("p");
-  div.className = "grid-item";
-  h3.innerText = dino[i].species;
-  img.src = dino[i].img;
-  p.innerText = dino[i].fact[Math.floor(Math.random() * 3)];
-  div.appendChild(h3);
-  div.appendChild(img);
-  div.appendChild(p);
-  tiles.push(div);
+function tileGenerator() {
+  const tiles = [];
+  for (let i = 0; i < 8; i++) {
+    const div = document.createElement("div");
+    const h3 = document.createElement("h3");
+    const img = document.createElement("img");
+    const p = document.createElement("p");
+    div.className = "grid-item";
+    h3.innerText = dino[i].species;
+    img.src = dino[i].img;
+    p.innerText = dino[i].fact[Math.floor(Math.random() * 3)];
+    div.appendChild(h3);
+    div.appendChild(img);
+    div.appendChild(p);
+    tiles.push(div);
+  }
+  return tiles;
 }
 
 // Add human data to dino tiles
-const div = document.createElement("div");
-const h3 = document.createElement("h3");
-const img = document.createElement("img");
-div.className = "grid-item";
-h3.innerText = human.name;
-img.src = "./images/human.png";
-div.appendChild(h3);
-div.appendChild(img);
-tiles.splice(4, 0, div);
+function addHuman(tiles) {
+  const div = document.createElement("div");
+  const h3 = document.createElement("h3");
+  const img = document.createElement("img");
+  div.className = "grid-item";
+  h3.innerText = human.name;
+  img.src = "./images/human.png";
+  div.appendChild(h3);
+  div.appendChild(img);
+  tiles.splice(4, 0, div);
+}
 
 // Add tiles to DOM
-for (let i = 0; i < 9; i++) {
-  const main = document.querySelector("#grid");
-  main.appendChild(tiles[i]);
+function addTiles(tiles) {
+  for (let i = 0; i < 9; i++) {
+    const main = document.querySelector("#grid");
+    main.appendChild(tiles[i]);
+  }
 }
+
 // Remove form from screen
+function removeForm() {
+  document.querySelector("#dino-compare").remove();
+}
 
 // On button click, prepare and display infographic
+document.querySelector("#btn").addEventListener("click", function () {});
