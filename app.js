@@ -8,11 +8,7 @@ const data = {
       diet: "herbavor",
       where: "North America",
       when: "Late Cretaceous",
-      fact: [
-        "First discovered in 1889 by Othniel Charles Marsh",
-        "Triceratops means 'three horned face'",
-        "Triceratops was one of the last dinosaurs",
-      ],
+      fact: ["First discovered in 1889 by Othniel Charles Marsh"],
       img: "./images/triceratops.png",
     },
     {
@@ -22,11 +18,7 @@ const data = {
       diet: "carnivor",
       where: "North America",
       when: "Late Cretaceous",
-      fact: [
-        "The largest known skull measures in at 5 feet long.",
-        "Tyrannosaurus Rex is not from the Jurassic Period",
-        "T-Rex has around 60 bone crunching teeth",
-      ],
+      fact: ["The largest known skull measures in at 5 feet long."],
       img: "./images/tyrannosaurus rex.png",
     },
     {
@@ -36,11 +28,7 @@ const data = {
       diet: "herbavor",
       where: "North America",
       when: "Late Cretaceous",
-      fact: [
-        "Anklyosaurus survived for approximately 135 million years.",
-        "Ankylosaurus' Clubbed Tail May Have Shattered Tyrannosaur Bones.",
-        "Ankylosaurus lived about 70 to 65.5 million years ago.",
-      ],
+      fact: ["Anklyosaurus survived for approximately 135 million years."],
       img: "./images/anklyosaurus.png",
     },
     {
@@ -50,11 +38,7 @@ const data = {
       diet: "herbavor",
       where: "North America",
       when: "Late Jurasic",
-      fact: [
-        "An asteroid was named 9954 Brachiosaurus in 1991.",
-        "Brachiosaurus' neck was 9 metres long",
-        "Brachiosaurus was named after its arms",
-      ],
+      fact: ["An asteroid was named 9954 Brachiosaurus in 1991."],
       img: "./images/brachiosaurus.png",
     },
     {
@@ -66,8 +50,6 @@ const data = {
       when: "Late Jurasic to Early Cretaceous",
       fact: [
         "The Stegosaurus had between 17 and 22 seperate places and flat spines.",
-        "Stegosaurus had a brain the size of a walnut",
-        "Stegosaurus supplemented its diet with small rocks",
       ],
       img: "./images/stegosaurus.png",
     },
@@ -78,11 +60,7 @@ const data = {
       diet: "carnivor",
       where: "North America",
       when: "Late Cretaceous",
-      fact: [
-        "Elasmosaurus was a marine reptile first discovered in Kansas.",
-        "The neck of Elasmosaurus contained 71 vertebrae",
-        "Elasmosaurus' were slow swimmers",
-      ],
+      fact: ["Elasmosaurus was a marine reptile first discovered in Kansas."],
       img: "./images/elasmosaurus.png",
     },
     {
@@ -92,11 +70,7 @@ const data = {
       diet: "carnivor",
       where: "North America",
       when: "Late Cretaceous",
-      fact: [
-        "Actually a flying reptile, the Pteranodon is not a dinosaur.",
-        "Pteranodon's wingspan was at least 23 feet",
-        "Pteradon's head had a massive crest at the back of the skull",
-      ],
+      fact: ["Actually a flying reptile, the Pteranodon is not a dinosaur."],
       img: "./images/pteranodon.png",
     },
     {
@@ -107,6 +81,7 @@ const data = {
       where: "World Wide",
       when: "Holocene",
       fact: [
+        "All birds are living dinosaurs",
         "All birds are living dinosaurs",
         "All birds are living dinosaurs",
         "All birds are living dinosaurs",
@@ -154,13 +129,9 @@ const human = new Human();
 Dino.prototype.compareWeight = function (dino, human) {
   const difference = dino.weight > human.weight;
   if (difference > 0) {
-    console.log(
-      `${dino.species} is heavier than the human by ${difference} lbs`
-    );
+    return `${dino.species} is heavier than the human by ${difference} lbs`;
   } else {
-    console.log(
-      `${dino.species} is lighter than the human by ${-difference} lbs`
-    );
+    return `${dino.species} is lighter than the human by ${-difference} lbs`;
   }
 };
 // Create Dino Compare Method 2
@@ -168,22 +139,18 @@ Dino.prototype.compareWeight = function (dino, human) {
 Dino.prototype.compareHeight = function (dino, human) {
   const difference = dino.height > human.height;
   if (difference > 0) {
-    console.log(
-      `${dino.species} is taller than the human by ${difference} inches`
-    );
+    return `${dino.species} is taller than the human by ${difference} inches`;
   } else {
-    console.log(
-      `${dino.species} is shorter than the human by ${-difference} inches`
-    );
+    return `${dino.species} is shorter than the human by ${-difference} inches`;
   }
 };
 // Create Dino Compare Method 3
 // NOTE: Weight in JSON file is in lbs, height in inches.
 Dino.prototype.compareDiet = function (dino, human) {
   if (dino.diet !== human.diet) {
-    console.log(`${dino.species} had a different diet than the human`);
+    return `${dino.species} had a different diet than the human`;
   } else {
-    console.log(`${dino.species} had the same diet as the human`);
+    return `${dino.species} had the same diet as the human`;
   }
 };
 
@@ -230,7 +197,7 @@ function addTiles(tiles) {
 
 // Remove form from screen
 function removeForm() {
-  document.querySelector("#dino-compare").remove();
+  document.querySelector("#dino-compare").style.display = "none";
 }
 
 // On button click, prepare and display infographic
