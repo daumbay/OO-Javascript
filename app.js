@@ -34,7 +34,7 @@ const data = {
     {
       species: "Brachiosaurus",
       weight: 70000,
-      height: "372",
+      height: 372,
       diet: "herbavor",
       where: "North America",
       when: "Late Jurasic",
@@ -119,15 +119,12 @@ function Human(name, height, weight, diet) {
     (this.diet = diet);
 }
 
-// Create Human Object
-const human = new Human();
-
 // Use IIFE to get human data from form
 
 // Create Dino Compare Method 1
 // NOTE: Weight in JSON file is in lbs, height in inches.
 Dino.prototype.compareWeight = function (dino, human) {
-  const difference = dino.weight > human.weight;
+  const difference = dino.weight - human.weight;
   if (difference > 0) {
     return `${dino.species} is heavier than the human by ${difference} lbs`;
   } else {
@@ -137,7 +134,7 @@ Dino.prototype.compareWeight = function (dino, human) {
 // Create Dino Compare Method 2
 // NOTE: Weight in JSON file is in lbs, height in inches.
 Dino.prototype.compareHeight = function (dino, human) {
-  const difference = dino.height > human.height;
+  const difference = dino.height - human.height;
   if (difference > 0) {
     return `${dino.species} is taller than the human by ${difference} inches`;
   } else {
@@ -154,6 +151,16 @@ Dino.prototype.compareDiet = function (dino, human) {
   }
 };
 
+// Generate facts for populating dino objects and store them in dino fact array
+function factGenerator(dino, human) {
+  for (let i = 0; i < 7; i++) {
+    dino[i].fact.push(dino[i].compareWeight(dino[i], human));
+    dino[i].fact.push(dino[i].compareHeight(dino[i], human));
+    dino[i].fact.push(dino[i].compareDiet(dino[i], human));
+  }
+  return dino;
+}
+
 // Generate Tiles for each Dino in Array
 function tileGenerator(dino) {
   const tiles = [];
@@ -165,7 +172,7 @@ function tileGenerator(dino) {
     div.className = "grid-item";
     h3.innerText = dino[i].species;
     img.src = dino[i].img;
-    p.innerText = dino[i].fact[Math.floor(Math.random() * 3)];
+    p.innerText = dino[i].fact[Math.floor(Math.random() * 4)];
     div.appendChild(h3);
     div.appendChild(img);
     div.appendChild(p);
@@ -175,7 +182,7 @@ function tileGenerator(dino) {
 }
 
 // Add human data to dino tiles
-function addHuman(tiles) {
+function addHuman(tiles, human) {
   const div = document.createElement("div");
   const h3 = document.createElement("h3");
   const img = document.createElement("img");
@@ -202,7 +209,13 @@ function removeForm() {
 
 // On button click, prepare and display infographic
 document.querySelector("#btn").addEventListener("click", function () {
-  const dino = createDino();
+  // Create Dino objects and store them in dino array
+  let dino = createDino();
+
+  // Create Human Object
+  const human = new Human();
+
+  // Retrieve data from form
   (function () {
     human.name = document.querySelector("#name").value;
     human.height =
@@ -211,8 +224,9 @@ document.querySelector("#btn").addEventListener("click", function () {
     human.weight = document.querySelector("#weight").value;
     human.diet = document.querySelector("#diet").value;
   })();
+  dino = factGenerator(dino, human);
   const tiles = tileGenerator(dino);
-  addHuman(tiles);
+  addHuman(tiles, human);
   addTiles(tiles);
   removeForm();
 });
